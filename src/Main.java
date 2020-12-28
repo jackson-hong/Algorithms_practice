@@ -1,27 +1,27 @@
 import java.util.Scanner;
 
 public class Main {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int input = sc.nextInt();
-        System.out.println(plusCycle(input));
+        overAverage(sc.nextInt());
     }
-    // baekjoon #1110
-    static int plusCycle(int num){
-        int result = 0;
-        int idx = 0;
+    // baekjoon #4344
+    static void overAverage(int num){
 
-         do{
-            int input = 0;
+        for(int i = 0; i < num; i++){
+            int peopleNum = sc.nextInt();
+            int[] people = new int[peopleNum];
+            int sum = 0;
+            int overAverage = 0;
+            for(int j = 0; j < peopleNum; j++){
+                int input = sc.nextInt();
+                sum += input;
+                people[j] = input;
+            }
 
-            if(idx==0) input = num;
-            else input = result;
-
-            result = (input%10) * 10 + (input/10+input%10) % 10;
-
-            idx++;
-        }while(result!=num);
-
-        return idx;
+            for(int j = 0; j < peopleNum; j++) if(people[j]>sum/peopleNum) overAverage++;
+            System.out.printf("%.3f%%", (overAverage/(double)peopleNum)*(Math.pow(10,2)));
+            System.out.println();
+        }
     }
 }
