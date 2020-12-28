@@ -3,25 +3,26 @@ import java.util.Scanner;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        overAverage(sc.nextInt());
-    }
-    // baekjoon #4344
-    static void overAverage(int num){
-
-        for(int i = 0; i < num; i++){
-            int peopleNum = sc.nextInt();
-            int[] people = new int[peopleNum];
-            int sum = 0;
-            int overAverage = 0;
-            for(int j = 0; j < peopleNum; j++){
-                int input = sc.nextInt();
-                sum += input;
-                people[j] = input;
+        boolean[] nums = new boolean[10000];
+        for(int i = 1; i < 10000; i++){
+            int num = i;
+            int temp = 0;
+            while(num < 10000){
+                int plus = 0;
+                temp = num;
+                while(temp > 0){
+                    plus += temp%10;
+                    temp /= 10;
+                }
+                num += plus;
+                if(num < 10000)nums[num] = true;
             }
-
-            for(int j = 0; j < peopleNum; j++) if(people[j]>sum/peopleNum) overAverage++;
-            System.out.printf("%.3f%%", (overAverage/(double)peopleNum)*(Math.pow(10,2)));
-            System.out.println();
         }
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i]==false)System.out.println(i);
+        }
+    }
+    // baekjoon #4673
+    static void selfNumber(){
     }
 }
