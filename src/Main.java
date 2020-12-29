@@ -3,18 +3,15 @@ import java.util.Scanner;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println(sumOfNum(sc.nextInt()));
+        searchAlphabet(sc.next());
     }
-    // baekjoon #11720
-    static int sumOfNum(int num){
-        int result = 0;
-        sc.nextLine();
-        String input = sc.nextLine();
+    // baekjoon #10809
+    static void searchAlphabet(String str){
 
-        for(int i = 0; i < num; i++){
-            result += Character.getNumericValue(input.charAt(i));
+        for(int i = 97; i < 123; i++){
+            CharSequence chaa = ""+(char)i;
+            if(str.contains(chaa))System.out.print(str.indexOf(i)+" ");
+            else System.out.print(-1 + " ");
         }
-
-        return result;
     }
 }
