@@ -3,13 +3,17 @@ import java.util.Scanner;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println(asciiCode(sc.next().charAt(0)));
+        System.out.println(sumOfNum(sc.nextInt()));
     }
-    // baekjoon #11654
-    static int asciiCode(char num){
+    // baekjoon #11720
+    static int sumOfNum(int num){
         int result = 0;
+        sc.nextLine();
+        String input = sc.nextLine();
 
-        result = num;
+        for(int i = 0; i < num; i++){
+            result += Character.getNumericValue(input.charAt(i));
+        }
 
         return result;
     }
