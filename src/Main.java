@@ -1,26 +1,47 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        duplicateString(sc.nextInt());
+        wordsStudy(sc.next());
     }
-    // baekjoon #2675
-    static void duplicateString(int num){
-        sc.nextLine();
-        for(int i = 0; i < num; i++){
-            //System.out.println("loop start");
-            String wholeInput = sc.nextLine();
-            int dupCount = Character.getNumericValue(wholeInput.charAt(0));
-            //System.out.println("dupCount passed:"+dupCount);
-            String input = wholeInput.substring(2,wholeInput.length());
-            //System.out.println("input passed:"+input);
-            for(int j = 0; j < input.length(); j++){
-                for(int k = 0; k < dupCount; k++){
-                    System.out.print(input.charAt(j));
+    // baekjoon #1157
+    static void wordsStudy(String str){
+        Map<Character,Integer> map = new HashMap();
+        str = str.toUpperCase();
+
+        for(int i = 0; i < str.length(); i++){
+            try {
+                char ch = str.charAt(i);
+                map.put(ch, 0);
+                for(int j = 0; j < str.length(); j++){
+                    if(ch==str.charAt(j))map.put(ch,map.get(ch)+1);
                 }
+                str = str.replaceAll(""+ch,"");
+            }catch(IndexOutOfBoundsException e){
+                break;
             }
-            System.out.println();
         }
+        Iterator it = map.entrySet().iterator();
+        int bigNum = 0;
+        char bigChar = 'a';
+        boolean hasTwoBig = false;
+        while(it.hasNext()){
+            Map.Entry<Character,Integer> en = (Map.Entry<Character,Integer>)it.next();
+            if(en.getValue() > bigNum){
+                bigNum = en.getValue();
+                bigChar = en.getKey();
+            }
+        }
+        map.remove(bigChar);
+        it = map.values().iterator();
+        while(it.hasNext()){
+            int num = (int)it.next();
+            if(bigNum==num){
+                System.out.println("?");
+                return;
+            }
+        }
+        System.out.println(bigChar);
     }
 }
