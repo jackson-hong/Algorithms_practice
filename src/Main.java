@@ -3,45 +3,33 @@ import java.util.*;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        wordsStudy(sc.next());
+        expressionOfNum(sc.nextInt());
     }
-    // baekjoon #1157
-    static void wordsStudy(String str){
-        Map<Character,Integer> map = new HashMap();
-        str = str.toUpperCase();
-
-        for(int i = 0; i < str.length(); i++){
-            try {
-                char ch = str.charAt(i);
-                map.put(ch, 0);
-                for(int j = 0; j < str.length(); j++){
-                    if(ch==str.charAt(j))map.put(ch,map.get(ch)+1);
+    // programmers expressionOfNum
+    static void expressionOfNum(int n){
+        int result = 0;
+        int[] nums = new int[n];
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = i+1;
+        }
+        int gap = 1;
+        for(int i = n-1; i >= 0; i--){//length
+            int sum = 0;
+            for(int j = i; j >= 0; j--){//start
+                sum = nums[j];
+                for(int l = 1; l < gap; l++) sum += nums[j + l];
+                System.out.println(sum + " gap : "+ gap);
+                if(sum==n){
+                    result++;
+                    break;
                 }
-                str = str.replaceAll(""+ch,"");
-            }catch(IndexOutOfBoundsException e){
-                break;
             }
+            gap++;
+            if(gap>n/2)break;
         }
-        Iterator it = map.entrySet().iterator();
-        int bigNum = 0;
-        char bigChar = 'a';
-        boolean hasTwoBig = false;
-        while(it.hasNext()){
-            Map.Entry<Character,Integer> en = (Map.Entry<Character,Integer>)it.next();
-            if(en.getValue() > bigNum){
-                bigNum = en.getValue();
-                bigChar = en.getKey();
-            }
-        }
-        map.remove(bigChar);
-        it = map.values().iterator();
-        while(it.hasNext()){
-            int num = (int)it.next();
-            if(bigNum==num){
-                System.out.println("?");
-                return;
-            }
-        }
-        System.out.println(bigChar);
+        System.out.println(result);
     }
+    //1 - 15 up : 1 gap : 1 length : 15
+    //1,2 - 2,3 - 3,4 - .. 14,15 up : 1 gap : 2  length: 14
+    //1,2,3 - 2,3,4 - 3,4,5 - .. 13,14,15 up : 1 gap : 3 length : 13
 }
