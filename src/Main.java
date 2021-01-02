@@ -6,25 +6,27 @@ import java.util.*;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-        String input = st.nextToken();
-
-        String[] cr = {"dz=","c=","c-","d-","lj","nj","s=","z="};
-        int result = 0;
-        for(int i = 0; i < cr.length; i++){
-            while(input.contains(cr[i])){
-                result++;
-                input = input.replaceFirst(cr[i]," ");
+        solution(sc.nextInt());
+    }
+    // programmers findPrimeNum
+    static int solution(int n){
+        ArrayList<Integer> list = new ArrayList();
+        list.add(2);
+        if(n > 2) {
+            for (int i = 3; i <= n; i++) {
+                for (int j = 0; j < list.size(); j++) {
+                    if (i % list.get(j) != 0) {
+                        if (j == list.size() - 1) {
+                            list.add(i);
+                            break;
+                        }
+                    }else {
+                        break;
+                    }
+                }
             }
         }
-        input.startsWith("");
-        input = input.replaceAll(" ","");
-        System.out.println(result+input.length());
-    }
-    // baekjoon #5622
-    // baekjoon #2941
-    static void solution(String str){
+        return list.size();
     }
 
 }
