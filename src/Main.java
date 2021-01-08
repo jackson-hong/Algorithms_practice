@@ -4,26 +4,41 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    //baekjoon #2775
+    //baekjoon #2839
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int times = Integer.parseInt(bf.readLine());
-        int[][] nums = new int[15][15];
-        for(int j = 0; j < nums.length;j++){
-            nums[0][j] = j+1;
-        }
-        for(int j = 1; j < nums.length; j++){
-            for(int k = 0; k < nums[j].length; k++){
-                if(k == 0)nums[j][k]=1;
-                else {
-                    nums[j][k] = nums[j][k-1] + nums[j-1][k];
+        int input = Integer.parseInt(bf.readLine());
+        int num = 1001;
+        int idx = 1;
+        while(num!=0){
+            if(input%5==0){//5로 나뉘는 경우
+                num = input / 5;
+                break;
+            }else{//5로 나뉘지 않는 경우
+                if(input%5==3){//5로 나눈 나머지가 3일 경우
+                    num = input / 5;
+                    num += 1;
+                    break;
+                }else {//5로 나눈 나머지가 3이 아닐 경우
+                    num = input/5 - idx;
+                    if(num<0){
+                        num = -1;
+                        break;
+                    }
+                    int rest = input - num*5;
+                    idx++;
+                    if(rest%3==0){
+                        num += rest/3;
+                        break;
+                    }
                 }
             }
+            if(num<0){
+                num = -1;
+                break;
+            }
+            num = 1001;
         }
-        for(int i = 0; i < times; i++){
-            int h = Integer.parseInt(bf.readLine());
-            int w = Integer.parseInt(bf.readLine());
-            System.out.println(nums[h][w-1]);
-        }
+        System.out.println(num);
     }
 }
