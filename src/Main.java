@@ -5,24 +5,23 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
-    //baekjoon #1978
+    //baekjoon #11653
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int times = Integer.parseInt(bf.readLine());
-        boolean[] table = new boolean[1001];
-        table[2] = true;
-        for(int i = 2; i < table.length; i++){
-            for(int j = 2; j < i; j++){
-                if(i%j==0)break;
-                if(j==i-1)table[i]=true;
+        int input = Integer.parseInt(bf.readLine());
+        List<Integer> list = new ArrayList<>();
+        int num = 2;
+        if(input==1)return;
+        while(input!=1){
+            if(input%num==0){
+                input /= num;
+                list.add(num);
+            }else{
+                num++;
             }
         }
-        int result = 0;
-        StringTokenizer st = new StringTokenizer(bf.readLine()," ");
-        for(int i = 0; i < times; i++){
-            int input = Integer.parseInt(st.nextToken());
-            if(table[input])result++;
+        for(int i : list){
+            System.out.println(i);
         }
-        System.out.println(result);
     }
 }
