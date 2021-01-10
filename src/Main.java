@@ -5,26 +5,24 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
-    //baekjoon #1011
+    //baekjoon #1978
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int times = Integer.parseInt(bf.readLine());
-        for(int i = 0; i < times; i++){
-            StringTokenizer st = new StringTokenizer(bf.readLine(), " ");
-            int start = Integer.parseInt(st.nextToken());
-            int goal = Integer.parseInt(st.nextToken());
-            int distance = goal - start;
-            int idx= 1;
-
-            for(;;idx++){
-                if(distance < Math.pow(idx,2)){
-                    idx--;
-                    break;
-                }else if(distance == Math.pow(idx,2)){
-                    break;
-                }
+        boolean[] table = new boolean[1001];
+        table[2] = true;
+        for(int i = 2; i < table.length; i++){
+            for(int j = 2; j < i; j++){
+                if(i%j==0)break;
+                if(j==i-1)table[i]=true;
             }
-            System.out.println((int)Math.ceil(2*idx-1 + (distance-Math.pow(idx,2))/idx));
         }
+        int result = 0;
+        StringTokenizer st = new StringTokenizer(bf.readLine()," ");
+        for(int i = 0; i < times; i++){
+            int input = Integer.parseInt(st.nextToken());
+            if(table[input])result++;
+        }
+        System.out.println(result);
     }
 }
