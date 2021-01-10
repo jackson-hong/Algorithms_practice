@@ -8,20 +8,21 @@ public class Main {
     //baekjoon #1929
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int input = Integer.parseInt(bf.readLine());
-        List<Integer> list = new ArrayList<>();
-        int num = 2;
-        if(input==1)return;
-        while(input!=1){
-            if(input%num==0){
-                input /= num;
-                list.add(num);
-            }else{
-                num++;
+        StringTokenizer st = new StringTokenizer(bf.readLine()," ");
+        int start = Integer.parseInt(st.nextToken());
+        int end = Integer.parseInt(st.nextToken());
+        boolean[] table = new boolean[end+1];//true = isNotPrime false = isPrime
+        table[0] = table[1] = true;
+        for(int i = 2; i*i < table.length; i++){
+            if(!table[i]){
+                for(int j = i*i; j < table.length; j += i){
+                    table[j] = true;
+                }
             }
         }
-        for(int i : list){
-            System.out.println(i);
+
+        for(int i = start; i < table.length; i++){
+            if(!table[i])System.out.println(i);
         }
     }
 }
