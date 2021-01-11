@@ -10,7 +10,6 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int max = 10000;
         boolean[] table =  new boolean[max+1]; //false = isPrime
-        ArrayList<Integer> primes = new ArrayList<>();
         table[0] = table[1] = true;
         for(int i = 2; i*i<max+1; i++){
             if(!table[i]){
@@ -19,28 +18,15 @@ public class Main {
                 }
             }
         }
-        for(int j = 2; j < max+1; j++){
-            if(!table[j])primes.add(j);
-        }
         int times = Integer.parseInt(bf.readLine());
         for(int i = 0; i < times; i++){
             int input = Integer.parseInt(bf.readLine());
-            int[] result = {0,10001};
-            outerloop:
-            for(int j = 0; primes.get(j) <= input; j++){
-                for(int k = 0;  primes.get(k) <= input; k++){
-                    int a = primes.get(j);
-                    int b = primes.get(k);
-                    if(a + b==input&& b-a >= 0 && result[1]-result[0] > b-a){
-                        result = new int[]{a, b};
-                        break;
-                    }
-                    if(k==primes.size()-1)break;
-                    if(a+b == input && b-a < 0)break outerloop;
+            for(int j = input/2; j > 0; j--){
+                if(!table[j]&&!table[input-j]){
+                    System.out.println(j + " " + (input-j));
+                    break;
                 }
-                if(j==primes.size()-1)break;
             }
-            System.out.println(result[0] + " " + result[1]);
         }
     }
 }
