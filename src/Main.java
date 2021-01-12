@@ -5,28 +5,22 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
-    //baekjoon #9020
+    //baekjoon #1085
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int max = 10000;
-        boolean[] table =  new boolean[max+1]; //false = isPrime
-        table[0] = table[1] = true;
-        for(int i = 2; i*i<max+1; i++){
-            if(!table[i]){
-                for(int j = i*i; j < max+1; j+=i){
-                    table[j]=true;
-                }
-            }
-        }
-        int times = Integer.parseInt(bf.readLine());
-        for(int i = 0; i < times; i++){
-            int input = Integer.parseInt(bf.readLine());
-            for(int j = input/2; j > 0; j--){
-                if(!table[j]&&!table[input-j]){
-                    System.out.println(j + " " + (input-j));
-                    break;
-                }
-            }
-        }
+        StringTokenizer sb = new StringTokenizer(bf.readLine(), " ");
+        int x = Integer.parseInt(sb.nextToken());
+        int y = Integer.parseInt(sb.nextToken());
+        int w = Integer.parseInt(sb.nextToken());
+        int h = Integer.parseInt(sb.nextToken());
+
+        int distance = 1001;
+        if(distance > x) distance = x;
+        if(distance > y) distance = y;
+        if(distance > w-x) distance = w-x;
+        if(distance > h-y) distance = h-y;
+
+        System.out.println(distance);
+
     }
 }
