@@ -11,11 +11,14 @@ public class Main {
         System.out.println(recursion(input));
     }
 
-    public static int recursion(int input){
-        if(input <= 1){
+    public static int recursion(int n){
+        if(n == 0){
+            return 0;
+        }else if(n == 1){
             return 1;
         }else {
-            return input * recursion(input-1);
+            System.out.println(""+recursion(n-1)+" " + recursion(n-2));
+            return recursion(n-1) + recursion(n-2);
         }
     }
 }
