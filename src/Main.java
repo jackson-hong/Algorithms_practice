@@ -4,11 +4,20 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    //baekjoon #10872
+    //baekjoon #2447
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int input = Integer.parseInt(bf.readLine());
-        System.out.println(recursion(input));
+//        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+//        int input = Integer.parseInt(bf.readLine());
+//        System.out.println(recursion(input));
+        List<Integer> list = new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(3,1);
+        for(int i :  list) {
+            System.out.println(i);
+        }
     }
 
     public static int recursion(int n){
